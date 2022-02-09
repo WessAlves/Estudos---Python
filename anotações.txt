@@ -1,0 +1,234 @@
+aula 1 Apresentação 
+Aula 2 - Como conseguir ajuda -  Curso na Udemy, fazer pergunta por lá
+Aula 3 Avaliação - 
+
+SEÇÃO 2
+ 
+        AUla 2 - Introdução a API e API REST
+            REST  = Representational State Transfer (Transferencia Representacional de Estado0)
+            RESTfull = é um padrão de criação de REST, 
+            API = (Aplicattion Programming Interface) INterface de cominucação de aplicações utilizando protocolo HTTP, a API existe para fazer com que diferentes aplicações se comuniquem
+            Padrão de Design de API é o RESTfull
+
+
+            REST - Representational Sate Transfer
+            HTTP é por design sem estado ou STATELESS, ou seja toda chamada feita a um requisitor HTTP é unica, a requisição HTTP não guarda dado
+            o REST não muda oque o HTTP é, mas ele coloca a responsabilidade de lembrar os dados no Cliente (Compitador, celular, qualquer dispositivo que esteja acessando)
+            Isso ocorre por que, uma requisição feita por um cliente pode ser respondida por qualquer servidor que esteja disponivel, ou seja o servidor talvez nunca tenha tido comunicação com o cliente
+            essas requisições ocorrem em diferentes EndPoints.
+
+        AULA 3 - Entendendo os EndPoints
+            Utilizamos Conceitos de Substantivos e Verbos para criação de EndPoints
+            Em uma API há um elemento chamado RESOURCE
+            Resource = Recurso ( pode ser uma model da nossa aplicação)
+
+            Fazemos alterações através das URI's 
+            URI's  são os EndPoints
+
+            SUBSTANTIVOS
+            Não se utiliza Numeros como recurso ou EndPoint
+            de acordo com o DEsign devesse utilizar, substantivos no plural
+
+            VERBOS
+            EM API Restfull, fazemos uso dos Verbos HTTP
+
+            PUT - Atualizar
+            GET  - lembrar
+            POST - criar
+            DELETE - Delete
+
+
+            GET = Serve para acessar/pegar, seja o Grupo ou apenas o individuo
+            POST = Serve para Criar um novo recurso na Coleção - Não utiliza-se post em um inviduo apenas em uma Coleção
+            PUT = Serve para atualizar um recurso individual na coleção, ao contrario do POST, o PUT é utilizado individualmente.
+            Delete = Serve para Excluir um recurso da coleção, não se utiliza o DELETE na coleção, apenas individual
+
+        AULA 4 - Entendendo as Requests
+            Requests = REquisição de um dispositivo a um servidor WEB (Requisição HTTP)
+            Após a ? (question mark) são passados conjuntos de chave  e valor que serão os parametros utilizados pela API, esta forma de passar dados em um requisição se chama QUERY STRING
+            Não há nada que me impeça de passar os dados extras diretamente pela QUERY, mas nem sempre é a forma recomendada
+            ex.:
+            ao inves de usar /api/v1/produtos?format=xml
+            utilizar : api/v1/produtos.xml
+
+            Cabeçalho HTTP
+            quando enviamnos uma solicitação a um servidor web, a primeira informação a chegar nele é o Cabeçalho
+            Accpet: Especifica o formato do arquivo que o Solicitante quer
+            Accept-Language : Especifica a Lingua que o Solicitante quer a informação
+            Cache-COntrol : Especifica se o conteudo pode ser consumido e em quanto tmepo ele pode ser atualizado
+
+            Na marioria das vezes o servidor ou a aplicação ka esta definida para requisições ocm tipo padrão
+
+            VERSÃO DA API
+            identifique a versão da sua api na URI
+            e mantenha o legado
+
+        Aula 5 - RESPONSE
+            Resposta do servidor a Request 
+            precisamos avaliar alguns pontos 
+            - Há query String na requisição?
+            - Qual foi o Verbo HTTP utilizado?
+            - Quai são os dados do cabeçalho?
+            - QUal o formato requisitado?
+            - Preparação dos dados
+
+            Em uma RESPONSE enviamos:
+            - dados
+            - Content-Type : DEve estar de acordo com o Acept do cabeçalho 
+            - Last-Modified: data da ultima criação
+            - Expires: até quando esse dado pode ser considerado
+            - Status : 200, 404,505 
+            
+            HTTP STATUS CODE
+            - Nivel 2: 200 a 299 Indica que tudo ok
+            - Nivel 3: 300 a 399 indica que o servidor entendeu a resquição mas o recurso esta em outro local
+            - Nivel 4: 400 a 499 indica que a requisição foi realizado com algum erro do lado do cliente, URI errada
+            - Nivel 5: 500 a 599 Indica que a requisição foi realizada mas houve algum erro do lado do servidor
+            
+            Função do Desenvolvedor é informar para o cliente qual o erro que ocorreu de forma mais clara possivel
+
+        AULA 6 - ENTENDENDO SOBRE A SEGURANÇA DE API's REST
+            Uma API que não consegue suprir a demanda é tão ruim quanto não ter uma
+            Pensa em alternativas que podem melhorar a escalabilidade do servidor da aplicação
+            - 1 Passo: Utilização do Cache ( REDIS ou MEMCACHE)
+                Nem todo cache do mundo pode nos salvar de um overflow, quando a aplicação tem seu limite de requisições por minuto
+                o ideal é que voce como desenvolvedor limite a quantidade de requisições que o seu servidor pode receber
+            - 2 Passo: Autenticação e autorização -  A forma mais comum de autenticação é o uso de tokens (chave criptografada que identifica os clientes, token é enviado no cabeçalho ou no corpo da requisição)
+                Autenticação: quem é o cliente
+                Autorização: oque o cliente pode fazer
+
+SEÇÃO 3 - DJANGO REST FRAMEWORK BASICO
+
+    AULA 1 - Explicação da SEÇÂO
+
+    AULA 2 - O QUE É DJANGO REST FRAMEWORK?
+        - DRF: Biblioteca após instalada e configurada é executada no topo de um projeto Django, utilizada para criar API's REST
+               Não faz ´parte do 'core' do Django. E um aplicação a parametros
+        - Model Serialization : DRF utiliza para mapear os DJANGO MODELS e prove uma facilidade para manipular os objetos e serializar/deserializar para JSON
+
+    AULA 3 - Instalação e Configuração
+        - Quando for instalar algum frame ou lib, verificar se a versão utiliza é uma versão LTS pois as versões LTS tem maior tempo de suporte 
+            instalação do Django 2.2.9
+            (pip install django==2.2.9)
+        
+        inciando projeto no django
+        (django-admin startproject)
+        No momento posso utilizar o "." no final da linha de codigo para que não seja criado um novo diretorio
+        ex.: django-admin startproject teste .
+        
+        Criando aplicação
+        (django-admin startapp)
+        
+        Adicionando app no projeto
+            - 1: Abrir Settings do projeto
+            - 2: Ir em Installed APP e adicionar o nome da aplicação ao final
+        
+            Alteração de horario  e linguagem 
+            TIME_ZONE = 'America/Sao_Paulo'
+            LANGUAGE_CODE = 'pt-br'
+        Adicionando url de arquivos estaticos
+        final do arquivo settings adicionar
+            static_url = '/caminho ou nome da pasta'
+            STATIC_ROOT = os.path.join(BASE_DIR, '/caminho ou diretorio')
+            MEDIA_URL='diretorio/'
+            MEDIA_ROOT = os.path.join(BASE_DIR, 'caminho ou diretorio')
+
+        Para criar uma model(classe - objeto) na aplicação devo ir no arquivo models desenvolver o objeto la
+        depois vou até o arquivo admin e importo os objetos criados no models
+
+        Gravando as models 
+            após concluir a criação e importação das models para salva-las no banco
+            executar o comando: PYTHON MANAGE.PY MAKEMIGRATIONS  depois o  MIGRATE
+        
+        CRIANDO SUPER USUARIO
+            PYTHON MANAGE.PY CREATESUPERUSER
+        
+
+        INSTALÇÃO DO DJANGOREST
+        pip install djangorestframework markdown django-filter
+
+        apos instalar devo adicionar no projeto atraves do arquivo settings adicionando na parte de INSTALLED APPS
+        'django_filters'
+        'rest_freamework'
+
+        após isso adicionar as configurações desejadas no final do arquivo, configuração de AUTENTICAÇÃO E PERMISSÕES
+            REST_FRAMEWORK = {
+                'DEFAULT_AUTHENTICATION_CLASSES': {
+                    'rest_framework.authentication.SessionAuthentication',
+                },
+                'DEFAULT_PERMISSION_CLASSES': {
+                'rest_framework.permission.IsAuthentication.OrReadOnly',
+            },
+                
+            }
+        VERIFICAR NA DOCUMENTAÇÃO DO DJANGOREST PARA VER TODAS AS OPÇÕES REFERENTE A ESSAS configurações
+    
+    
+    AULA 4 - USANDO O MODEL SERIALIZER
+        Model serializer é um dos mais poderosos recursos do DRF
+        ele serve para que possamos tranformar arquivos .JSON em .PY e vice-versa
+        JSON  é um formato de dados Textual que permite que homanos e computadores consigam ler e interpretar
+        atualnmente o JSON é o codigo ideal para transferir dados pela internet
+        crie um arquivo serializers.py dentro da aplicação, nele faça a importação das models e do serializer
+        from rest_framework import serializers
+        from .models import aplicação
+
+        apos isso crie classes com para as models aplicando o model serializer e expecificando oque vc deseja q seja mostrado 
+
+        class CursoSerializer(serializers.ModelSerializer):
+            class Meta:
+                model = Curso
+                fields = {
+                    'id',
+                    'titulo',
+                    'url',
+                    'criacao',
+                    'ativo'
+                    }
+        JSONRenderer 
+
+        A diferença de um JSON para um dicionario python é a utilização das aspas Duplas
+        o (b') indica que a informação restornada é uma string binaria
+
+
+    AULA 5 - IMPREMENTO APPVIEWS PARA HTTP
+    No arquivo view faça a importação do API view e do repsosnse
+
+    from rest_framework.views import APIView
+    from rest_framework.response import Response
+
+    Após importe tambem as models que serão aplicadas na API e depois as Serializers
+
+    from .models import Curso, Avaliacao
+    from .serializer import CursoSerializer, AvaliacaoSerializer
+
+    depois disso e emoldure os metodos HTTP que serão excutados Ex.: 
+        class AvaliacaoAPIView(APIView):
+            """
+            API de Avaliações Geek
+            """
+            def get(self, request):
+                avaliacoes = Avaliacao.object.all() - Essa linha instancia todos os objetos na variavel
+                serializer = AvaliacaoSerializer(avaliacoes, many = True)
+                return Response (serializer.data)
+
+
+    Após concluir voce deve adicionar as rotas para que as informações sejam exibidas
+    crie um arquivo de url dentro da sua app
+    dentro faça as importações do django path e das classes presentes na views
+    
+    from django.url import path 
+    from .views import CursoAPIView, AvaliacaoAPIView
+
+    após isso crie as rotas (ENDPOINTS)
+        urlpatterns = [
+            path('curso/', CursoAPIView.as_view(), name='cursos'),
+            path('avaliacoes/', AvaliacaoAPIView(), name='avaliacoes')
+            path('auth/', include('rest_framework.urls')),
+        ]
+    depois Abra o arquivo URL do PROJETO e adicione as URLS da APP
+
+        path('api/v1/', include('Cursos.urls'))
+
+    
+
